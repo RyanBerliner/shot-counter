@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      html, body {
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      div {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-family: monospace;
+        font-size: 47px;
+        padding: 20px 0;
+      }
+
+      form {
+        padding: 0 15px 15px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      input {
+        padding: 50px 20px;
+        border: none;
+        appearance: none;
+        font-size: 21px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      input[value="make"],
+      input[value="miss"] {
+        color: white;
+        margin-bottom: 15px;
+      }
+
+      input[value="make"] {
+        background: palegreen;
+        color: darkgreen;
+      }
+
+      input[value="miss"] {
+        background: mistyrose;
+        color: darkred;
+      }
+
+      input[value="reset"] {
+        background: whitesmoke;
+        color: dimgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        <span id="make">0</span> of <span id="total">0</span>
+      </p>
+    </div>
+    <form>
+      <input type="submit" value="make"/>
+      <input type="submit" value="miss"/>
+      <input type="submit" value="reset"/>
+    </form>
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', record);
+
+      const data = {'make': 0, 'miss': 0};
+
+      function record(event) {
+        event.preventDefault();
+        const val = event.submitter.value;
+        if (val === 'reset') {
+          data['make'] = 0;
+          data['miss'] = 0;
+          document.getElementById('make').innerHTML = 0;
+          document.getElementById('total').innerHTML = 0;
+        } else {
+          data[val] += 1;
+          document.getElementById('make').innerHTML = data.make;
+          document.getElementById('total').innerHTML = data.make + data.miss;
+        }
+      }
+    </script>
+  </body>
+</html>
